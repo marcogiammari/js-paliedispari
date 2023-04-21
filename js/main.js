@@ -7,7 +7,12 @@ const dispariResult = document.getElementById("dispari-result")
 
 // associo la funzione isPalindrome al bottone
 paliBtn.addEventListener("click", function() {
-    isPalindrome(document.getElementById("pali-input").value);
+    let usersWord = document.getElementById("pali-input").value;
+    if (usersWord != "") {
+        isPalindrome(usersWord);
+    } else {
+        paliResult.innerHTML = ("Per favore inserisci una parola o una frase");
+    }
 })
 
 // definisco la funzione
