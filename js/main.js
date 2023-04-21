@@ -28,7 +28,7 @@ dispariBtn.addEventListener("click", function() {
     if (sceltaPari) {
         startGame("pari")
     }
-    else {
+    else if (sceltaDispari) {
         startGame("dispari")
     }
 }); 
