@@ -3,10 +3,11 @@ const dispariBtn = document.getElementById("dispari-btn");
 const paliResult = document.getElementById("pali-result");
 const dispariResult = document.getElementById("dispari-result")
 
-paliBtn.addEventListener("click", isPalindrome);
+paliBtn.addEventListener("click", function() {
+    isPalindrome(document.getElementById("pali-input").value);
+})
 
-function isPalindrome() {
-    let word = document.getElementById("pali-input").value;
+function isPalindrome(word) {
     let reversed = "";
     for (let i = word.length-1; i >= 0; i--) {
         const ch = word[i];
@@ -21,18 +22,27 @@ function isPalindrome() {
     }
 }
 
-dispariBtn.addEventListener("click", startGame); 
-
-function startGame() {
-    let validStr = false;
-    do {
-        choice = prompt("pari o dispari?");
-        choice = choice.toLowerCase();
-        if (choice == "pari" || choice == "dispari") {
-            validStr = true;
-        }
+dispariBtn.addEventListener("click", function() {
+    let sceltaPari = document.getElementById("scelta-pari").checked;
+    let sceltaDispari = document.getElementById("scelta-dispari").checked;
+    if (sceltaPari) {
+        startGame("pari")
     }
-    while (!validStr);
+    else {
+        startGame("dispari")
+    }
+}); 
+
+function startGame(scelta) {
+    // let validStr = false;
+    // do {
+    //     choice = prompt("pari o dispari?");
+    //     choice = choice.toLowerCase();
+    //     if (choice == "pari" || choice == "dispari") {
+    //         validStr = true;
+    //     }
+    // }
+    // while (!validStr);
 
     let validNum = false;
     while (!validNum) {
@@ -47,7 +57,7 @@ function startGame() {
     if (sum%2==0) {
         result = "pari";
     }
-    if (choice == result) {
+    if (scelta == result) {
         dispariResult.innerHTML = (`il risultato è ${result} (${sum}): hai vinto`);
     }
     else {
