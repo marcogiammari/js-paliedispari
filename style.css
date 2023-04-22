@@ -1,0 +1,8 @@
+body {
+    background-color: #0a0038 !important;
+}
+
+body>div {
+    background: linear-gradient(133deg, #27009f, #009f9f) !important;
+    box-shadow: inset 0 0 5px 2px white;
+}

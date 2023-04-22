@@ -3,10 +3,10 @@
 const paliBtn = document.getElementById("pali-btn");
 const dispariBtn = document.getElementById("dispari-btn");
 const paliResult = document.getElementById("pali-result");
-const dispariResult = document.getElementById("dispari-result")
+const dispariCard = document.getElementById("dispari-card")
 
 // associo la funzione isPalindrome al bottone
-paliBtn.addEventListener("click", function() {
+paliBtn.addEventListener("click", function () {
     let usersWord = document.getElementById("pali-input").value;
     if (usersWord != "") {
         isPalindrome(usersWord);
@@ -18,24 +18,25 @@ paliBtn.addEventListener("click", function() {
 // definisco la funzione
 function isPalindrome(word) {
     // regex per gli spazi bianchi
-    word = word.replace(/\s/g, '' );
+    word = word.replace(/\s/g, '');
+    word = word.toLowerCase();
     // scrivo la parola al contrario in una variabile 
     let reversed = "";
-    for (let i = word.length-1; i >= 0; i--) {
+    for (let i = word.length - 1; i >= 0; i--) {
         const ch = word[i];
         reversed += ch;
     }
     // verifico se la parola è palindroma
     if (word == reversed) {
-        paliResult.innerHTML = "Sì, è palindromo";
+        paliResult.innerHTML = "<strong>Sì, è palindromo</strong>";
     }
     else {
-        paliResult.innerText = "No, non è palindromo";
+        paliResult.innerText = "<strong>No, non è palindromo</strong>";
     }
 }
 
 // associo la funzione startGame al bottone
-dispariBtn.addEventListener("click", function() {
+dispariBtn.addEventListener("click", function () {
     // prendo dal dom la scelta
     let sceltaPari = document.getElementById("scelta-pari").checked;
     let sceltaDispari = document.getElementById("scelta-dispari").checked;
@@ -46,30 +47,44 @@ dispariBtn.addEventListener("click", function() {
     else if (sceltaDispari) {
         startGame("dispari");
     }
-}); 
+    else {
+        alert("Scegli pari o dispari");
+    }
+});
 
 // definisco startGame
 function startGame(scelta) {
-    // controllo di validazione del numero
-    let validNum = false;
-    while (!validNum) {
-        userNum = parseInt(prompt("scegli un numero da uno a cinque"));
-        if (userNum > 0 && userNum < 6) {
-            validNum = true;
+    userNum = parseInt(document.getElementById("num").value);
+    if (userNum < 1 || userNum > 5 || isNaN(userNum)) {
+        alert("Inserisci un numero tra 1 e 5")
+    } else {
+        setTimeout(() => {
+            dispariCard.innerHTML = "<p>Hai scelto " + scelta + " e hai tirato il numero: " + userNum + "</p>";
+        }, 500);
+        // genero il numero random e lo sommo
+        let computerNum = Math.floor(Math.random() * 5 + 1);
+        setTimeout(() => {
+            dispariCard.innerHTML += `<p>Il computer ha tirato: ${computerNum}</p>`
+        }, 2000);
+
+        let sum = userNum + computerNum;
+        let result = "dispari";
+        // verifico il risultato e porto nel dom il risultato
+        if (sum % 2 == 0) {
+            result = "pari";
         }
-    }
-    // genero il numero random e lo sommo
-    let computerNum = Math.floor(Math.random() * 5 + 1);
-    let sum = userNum + computerNum;
-    let result = "dispari";
-    // verifico il risultato e porto nel dom il risultato
-    if (sum%2==0) {
-        result = "pari";
-    }
-    if (scelta == result) {
-        dispariResult.innerHTML = (`il risultato è ${result} (${sum}): hai vinto`);
-    }
-    else {
-        dispariResult.innerText = (`il risultato è ${result} (${sum}): hai perso`);
+        if (scelta == result) {
+            setTimeout(() => {
+                dispariCard.innerHTML += `<p><strong>Il risultato è ${sum} (${result}): hai vinto</strong></p>`;
+                dispariBtn.innerText = "Rigioca";
+            }, 4000);
+
+        }
+        else {
+            setTimeout(() => {
+                dispariCard.innerHTML += `<p><strong>Il risultato è ${sum} (${result}): hai perso</strong></p>`;
+                dispariBtn.innerText = "Rigioca";
+            }, 4000);
+        }
     }
 }

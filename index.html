@@ -5,10 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pali e dispari</title>
+    <link rel="stylesheet" href="style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 </head>
-<body class="d-flex justify-content-center align-items-center vh-100 bg-dark flex-column gap-5">
-    <div class="card d-flex flex-column align-items-center text-center p-2 col-lg-3">
+<body class="d-flex justify-content-center align-items-center vh-100 flex-column gap-5">
+    <div class="card d-flex flex-column align-items-center text-center p-2 col-8 col-md-6 col-lg-4 text-white">
         <div class="card-header w-100">
             <h2>pali...</h2>
         </div>
@@ -18,7 +19,7 @@
             <p id="pali-result"></p>
         </div>
     </div>
-    <div class="card d-flex flex-column align-items-center justify-content-center text-center p-2 col-lg-3">
+    <div class="card d-flex flex-column align-items-center justify-content-center text-center p-2 col-8 col-md-6 col-lg-4 text-white">
         <div class="card-header w-100">
             <h2>... o dispari?</h2>
         </div>
@@ -27,8 +28,11 @@
                 <input id="scelta-pari" name="scelta" value="pari" type="radio">Pari
                 <input id="scelta-dispari" name="scelta" value="dispari" type="radio">Dispari
             </div>
+            <label for="num">Scegli un numero da uno a cinque:</label>
+            <input id="num" type="number" min="1" max="5">
             <button id="dispari-btn" class="btn btn-success">Gioca</button>
-            <p id="dispari-result"></p>
+        </div>
+        <div id="dispari-card">
         </div>
     </div>
     <script src="js/main.js"></script>
